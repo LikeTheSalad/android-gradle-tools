@@ -19,8 +19,8 @@ artifactPublisher {
     issueTrackerUrl = "https://github.com/LikeTheSalad/android-gradle-tools/issues"
 }
 
-description = "some description"
-group = "come.group"
+description = "Gradle plugin that extracts android plugin information"
+group = "com.likethesalad.tools"
 version = "1.0.0"
 
 ext {
