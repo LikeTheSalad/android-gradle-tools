@@ -3,6 +3,7 @@ package com.likethesalad.tools.android.plugin.data.impl
 import com.android.build.gradle.api.BaseVariant
 import com.likethesalad.tools.android.plugin.data.AndroidVariantData
 import org.gradle.api.artifacts.Configuration
+import org.gradle.api.file.DirectoryProperty
 
 class DefaultAndroidVariantData(private val variant: BaseVariant) : AndroidVariantData {
 
@@ -13,4 +14,12 @@ class DefaultAndroidVariantData(private val variant: BaseVariant) : AndroidVaria
     override fun getVariantFlavors(): List<String> = variant.productFlavors.map { it.name }
 
     override fun getRuntimeConfiguration(): Configuration = variant.runtimeConfiguration
+
+    override fun registerGeneratedJavaResources(outputDir: DirectoryProperty) {
+        variant.registerGeneratedResFolders(outputDir.files())
+    }
+
+    override fun registerGeneratedJavaBinaries(outputDir: DirectoryProperty) {
+        variant.registerPreJavacGeneratedBytecode(outputDir.files())
+    }
 }
