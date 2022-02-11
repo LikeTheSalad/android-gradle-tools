@@ -2,10 +2,25 @@ package com.likethesalad.tools.android.plugin.data.impl
 
 import com.android.build.gradle.api.BaseVariant
 import com.likethesalad.tools.android.plugin.data.AndroidVariantData
-import org.gradle.api.artifacts.Configuration
-import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.Action
+import org.gradle.api.Project
+import org.gradle.api.Task
+import org.gradle.api.artifacts.ArtifactView
+import org.gradle.api.attributes.Attribute
+import org.gradle.api.file.Directory
+import org.gradle.api.file.FileCollection
+import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.AbstractCopyTask
+import org.gradle.api.tasks.TaskProvider
 
-class DefaultAndroidVariantData(private val variant: BaseVariant) : AndroidVariantData {
+class DefaultAndroidVariantData(
+    private val project: Project,
+    private val variant: BaseVariant
+) : AndroidVariantData {
+
+    companion object {
+        private val artifactTypeAttr = Attribute.of("artifactType", String::class.java)
+    }
 
     override fun getVariantName(): String = variant.name
 
@@ -13,13 +28,28 @@ class DefaultAndroidVariantData(private val variant: BaseVariant) : AndroidVaria
 
     override fun getVariantFlavors(): List<String> = variant.productFlavors.map { it.name }
 
-    override fun getRuntimeConfiguration(): Configuration = variant.runtimeConfiguration
-
-    override fun registerGeneratedJavaResources(outputDir: DirectoryProperty) {
-        variant.registerGeneratedResFolders(outputDir.files())
+    override fun getLibrariesResources(): FileCollection {
+        return variant.runtimeConfiguration.incoming
+            .artifactView(getResArtifactViewAction())
+            .artifacts
+            .artifactFiles
     }
 
-    override fun registerGeneratedJavaBinaries(outputDir: DirectoryProperty) {
-        variant.registerPreJavacGeneratedBytecode(outputDir.files())
+    override fun getProcessJavaResourcesProvider(): TaskProvider<AbstractCopyTask> {
+        return variant.processJavaResourcesProvider
+    }
+
+    override fun registerGeneratedJavaBinaries(generator: TaskProvider<out Task>, outputDir: Provider<Directory>) {
+        val files = project.files(outputDir).builtBy(generator)
+        variant.registerPreJavacGeneratedBytecode(files)
+    }
+
+    private fun getResArtifactViewAction(): Action<ArtifactView.ViewConfiguration> {
+        return Action { config ->
+            config.isLenient = false
+            config.attributes {
+                it.attribute(artifactTypeAttr, "android-res")
+            }
+        }
     }
 }

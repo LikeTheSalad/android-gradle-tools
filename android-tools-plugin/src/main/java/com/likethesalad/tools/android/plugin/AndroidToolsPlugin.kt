@@ -26,26 +26,26 @@ class AndroidToolsPlugin : Plugin<Project> {
         createExtension(project, androidExtension)
 
         when (androidExtension) {
-            is AppExtension -> configureAppExtension(androidExtension)
-            is LibraryExtension -> configureLibraryExtension(androidExtension)
+            is AppExtension -> configureAppExtension(project, androidExtension)
+            is LibraryExtension -> configureLibraryExtension(project, androidExtension)
             else -> throw UnsupportedOperationException("Android extension type not supported")
         }
     }
 
-    private fun configureLibraryExtension(androidExtension: LibraryExtension) {
+    private fun configureLibraryExtension(project: Project, androidExtension: LibraryExtension) {
         androidExtension.libraryVariants.all {
-            addVariantData(it)
+            addVariantData(project, it)
         }
     }
 
-    private fun configureAppExtension(androidExtension: AppExtension) {
+    private fun configureAppExtension(project: Project, androidExtension: AppExtension) {
         androidExtension.applicationVariants.all {
-            addVariantData(it)
+            addVariantData(project, it)
         }
     }
 
-    private fun addVariantData(androidVariant: BaseVariant) {
-        val variant = DefaultAndroidVariantData(androidVariant)
+    private fun addVariantData(project: Project, androidVariant: BaseVariant) {
+        val variant = DefaultAndroidVariantData(project, androidVariant)
         publisher.publish(variant)
     }
 
