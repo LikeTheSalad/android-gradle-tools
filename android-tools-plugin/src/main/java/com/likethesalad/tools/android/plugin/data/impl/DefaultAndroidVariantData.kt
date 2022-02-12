@@ -29,10 +29,11 @@ class DefaultAndroidVariantData(
     override fun getVariantFlavors(): List<String> = variant.productFlavors.map { it.name }
 
     override fun getLibrariesResources(): FileCollection {
-        return variant.runtimeConfiguration.incoming
-            .artifactView(getResArtifactViewAction())
-            .artifacts
-            .artifactFiles
+        return getFilesFromConfiguration("android-res")
+    }
+
+    override fun getLibrariesJars(): FileCollection {
+        return getFilesFromConfiguration("jar")
     }
 
     override fun getProcessJavaResourcesProvider(): TaskProvider<AbstractCopyTask> {
@@ -44,11 +45,18 @@ class DefaultAndroidVariantData(
         variant.registerPreJavacGeneratedBytecode(files)
     }
 
-    private fun getResArtifactViewAction(): Action<ArtifactView.ViewConfiguration> {
+    private fun getFilesFromConfiguration(artifactType: String): FileCollection {
+        return variant.runtimeConfiguration.incoming
+            .artifactView(getAndroidArtifactViewAction(artifactType))
+            .artifacts
+            .artifactFiles
+    }
+
+    private fun getAndroidArtifactViewAction(artifactType: String): Action<ArtifactView.ViewConfiguration> {
         return Action { config ->
             config.isLenient = false
             config.attributes {
-                it.attribute(artifactTypeAttr, "android-res")
+                it.attribute(artifactTypeAttr, artifactType)
             }
         }
     }

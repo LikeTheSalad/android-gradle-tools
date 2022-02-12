@@ -12,6 +12,7 @@ interface AndroidVariantData {
     fun getVariantType(): String
     fun getVariantFlavors(): List<String>
     fun getLibrariesResources(): FileCollection
+    fun getLibrariesJars(): FileCollection
     fun getProcessJavaResourcesProvider(): TaskProvider<AbstractCopyTask>
     fun registerGeneratedJavaBinaries(generator: TaskProvider<out Task>, outputDir: Provider<Directory>)
 }
