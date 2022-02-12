@@ -33,7 +33,7 @@ class DefaultAndroidVariantData(
     }
 
     override fun getLibrariesJars(): FileCollection {
-        return getFilesFromConfiguration("jar")
+        return getFilesFromConfiguration("android-classes-jar")
     }
 
     override fun getProcessJavaResourcesProvider(): TaskProvider<AbstractCopyTask> {
