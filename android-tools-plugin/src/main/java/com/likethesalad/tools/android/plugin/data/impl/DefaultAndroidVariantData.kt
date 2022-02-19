@@ -40,6 +40,10 @@ class DefaultAndroidVariantData(
         return variant.processJavaResourcesProvider
     }
 
+    override fun getMergeResourcesProvider(): TaskProvider<out Task> {
+        return variant.mergeResourcesProvider
+    }
+
     override fun registerGeneratedJavaBinaries(generator: TaskProvider<out Task>, outputDir: Provider<Directory>) {
         val files = project.files(outputDir).builtBy(generator)
         variant.registerPreJavacGeneratedBytecode(files)

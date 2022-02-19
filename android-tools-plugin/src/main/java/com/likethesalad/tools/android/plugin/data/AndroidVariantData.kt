@@ -14,5 +14,6 @@ interface AndroidVariantData {
     fun getLibrariesResources(): FileCollection
     fun getLibrariesJars(): FileCollection
     fun getProcessJavaResourcesProvider(): TaskProvider<AbstractCopyTask>
+    fun getMergeResourcesProvider(): TaskProvider<out Task>
     fun registerGeneratedJavaBinaries(generator: TaskProvider<out Task>, outputDir: Provider<Directory>)
 }
