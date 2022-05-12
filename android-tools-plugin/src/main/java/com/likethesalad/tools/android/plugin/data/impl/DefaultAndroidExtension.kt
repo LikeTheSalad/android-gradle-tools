@@ -15,6 +15,10 @@ class DefaultAndroidExtension(private val extension: BaseExtension) : AndroidExt
         getVariantRes(variantName).setSrcDirs(dirs)
     }
 
+    override fun addVariantSrcDir(variantName: String, dir: Any) {
+        getVariantRes(variantName).srcDir(dir)
+    }
+
     private fun getVariantRes(variantName: String): AndroidSourceDirectorySet {
         return extension.sourceSets.getByName(variantName).res
     }
