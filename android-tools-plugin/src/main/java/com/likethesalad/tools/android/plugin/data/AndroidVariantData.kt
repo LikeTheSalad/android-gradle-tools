@@ -1,10 +1,9 @@
 package com.likethesalad.tools.android.plugin.data
 
-import org.gradle.api.Task
+import com.likethesalad.tools.android.plugin.base.BaseJavaBytecodeGeneratorTask
 import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.provider.Provider
-import org.gradle.api.tasks.AbstractCopyTask
 import org.gradle.api.tasks.TaskProvider
 
 interface AndroidVariantData {
@@ -13,7 +12,8 @@ interface AndroidVariantData {
     fun getVariantFlavors(): List<String>
     fun getLibrariesResources(): FileCollection
     fun getLibrariesJars(): FileCollection
-    fun getProcessJavaResourcesProvider(): TaskProvider<AbstractCopyTask>
-    fun getMergeResourcesProvider(): TaskProvider<out Task>
-    fun registerGeneratedJavaBinaries(generator: TaskProvider<out Task>, outputDir: Provider<Directory>)
+    fun registerGeneratedJavaBinaries(
+        generator: TaskProvider<out BaseJavaBytecodeGeneratorTask>,
+        outputDir: Provider<Directory>
+    )
 }
