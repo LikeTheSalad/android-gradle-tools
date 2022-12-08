@@ -10,7 +10,7 @@ object AgpApiHelper {
         }
         val componentsHelper = Class.forName("com.likethesalad.tools.android.plugin.version.AgpComponentsHelperImpl")
             .getDeclaredConstructor(Project::class.java).newInstance(project) as AgpComponentsHelper
-        return componentsHelper.isVersionGreaterOrEqualTo(7, 3)
+        return componentsHelper.isVersionLowerThan(7, 3)
     }
 
     private fun isAndroidComponentsAvailable(): Boolean {

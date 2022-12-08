@@ -6,9 +6,9 @@ import org.gradle.api.Project
 
 class AgpComponentsHelperImpl(private val project: Project) : AgpComponentsHelper {
 
-    override fun isVersionGreaterOrEqualTo(major: Int, minor: Int): Boolean {
+    override fun isVersionLowerThan(major: Int, minor: Int): Boolean {
         val other = AndroidPluginVersion(major, minor)
-        return getAndroidComponentsExtension().pluginVersion >= other
+        return getAndroidComponentsExtension().pluginVersion < other
     }
 
     private fun getAndroidComponentsExtension(): AndroidComponentsExtension<*, *, *> {

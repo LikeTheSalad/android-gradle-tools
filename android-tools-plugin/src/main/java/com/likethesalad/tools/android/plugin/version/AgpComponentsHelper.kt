@@ -2,5 +2,5 @@ package com.likethesalad.tools.android.plugin.version
 
 interface AgpComponentsHelper {
 
-    fun isVersionGreaterOrEqualTo(major: Int, minor: Int): Boolean
+    fun isVersionLowerThan(major: Int, minor: Int): Boolean
 }
