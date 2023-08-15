@@ -1,7 +1,7 @@
 package com.likethesalad.tools.android.plugin
 
+import com.likethesalad.tools.agpcompat.api.AgpCompatibilityEntrypoint
 import com.likethesalad.tools.agpcompat.api.observable.VariantPublisher
-import com.likethesalad.tools.android.plugin.data.strategies.PluginStrategy
 import com.likethesalad.tools.android.plugin.extension.AndroidToolsPluginExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -17,7 +17,7 @@ class AndroidToolsPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         publisher = VariantPublisher()
         val extension = createExtension(project)
-        val pluginStrategy = PluginStrategy.getStrategy(project)
+        val pluginStrategy = AgpCompatibilityEntrypoint.findCompatibleStrategy(project)
         extension.androidExtension = pluginStrategy.configure(project, publisher)
     }
 
