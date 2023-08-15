@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
+    api project(":agp-compatibility:agp-compatibility-api")
     compileOnly "com.android.tools.build:gradle:$androidBuild_version"
-    implementation project(":agp-compatibility:agp-compatibility-api")
 }
 
 java {

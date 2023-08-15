@@ -1,3 +1,4 @@
 include ':android-tools-plugin'
 include ':agp-compatibility:agp-compatibility-api'
 include ':agp-compatibility:agp-compatibility-7-2'
+include ':agp-compatibility:agp-compatibility-7-3'

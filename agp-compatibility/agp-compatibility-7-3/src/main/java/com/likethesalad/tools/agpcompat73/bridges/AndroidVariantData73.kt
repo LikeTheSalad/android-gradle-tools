@@ -1,7 +1,9 @@
-package com.likethesalad.tools.android.plugin.data.impl.componentextension
+package com.likethesalad.tools.agpcompat73.bridges
 
 import com.android.build.api.artifact.MultipleArtifact
 import com.android.build.api.variant.Variant
+import com.likethesalad.tools.agpcompat.api.bridges.AndroidVariantData
+import com.likethesalad.tools.agpcompat.api.tasks.DirProducerTask
 import org.gradle.api.Action
 import org.gradle.api.artifacts.ArtifactView
 import org.gradle.api.attributes.Attribute
@@ -11,7 +13,7 @@ import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskProvider
 
 @Suppress("UnstableApiUsage")
-class ComponentAndroidVariantData(private val variant: Variant) : AndroidVariantData {
+class AndroidVariantData73(private val variant: Variant) : AndroidVariantData {
 
     companion object {
         private val artifactTypeAttr = Attribute.of("artifactType", String::class.java)
@@ -34,11 +36,11 @@ class ComponentAndroidVariantData(private val variant: Variant) : AndroidVariant
     }
 
     override fun registerGeneratedJavaBinaries(
-        generator: TaskProvider<out BaseJavaBytecodeGeneratorTask>,
+        generator: TaskProvider<out DirProducerTask>,
         outputDir: Provider<Directory>
     ) {
         variant.artifacts.use(generator)
-            .wiredWith(BaseJavaBytecodeGeneratorTask::outputDir)
+            .wiredWith(DirProducerTask::outputDir)
             .toAppendTo(MultipleArtifact.ALL_CLASSES_DIRS)
     }
 
