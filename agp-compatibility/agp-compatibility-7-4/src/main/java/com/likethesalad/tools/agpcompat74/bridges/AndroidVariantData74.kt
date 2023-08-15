@@ -1,6 +1,7 @@
 package com.likethesalad.tools.agpcompat74.bridges
 
-import com.android.build.api.artifact.MultipleArtifact
+import com.android.build.api.artifact.ScopedArtifact
+import com.android.build.api.variant.ScopedArtifacts
 import com.android.build.api.variant.Variant
 import com.likethesalad.tools.agpcompat.api.bridges.AndroidVariantData
 import com.likethesalad.tools.agpcompat.api.tasks.DirProducerTask
@@ -39,9 +40,9 @@ class AndroidVariantData74(private val variant: Variant) : AndroidVariantData {
         generator: TaskProvider<out DirProducerTask>,
         outputDir: Provider<Directory>
     ) {
-        variant.artifacts.use(generator)
-            .wiredWith(DirProducerTask::outputDir)
-            .toAppendTo(MultipleArtifact.ALL_CLASSES_DIRS)
+        variant.artifacts.forScope(ScopedArtifacts.Scope.PROJECT)
+            .use(generator)
+            .toAppend(ScopedArtifact.CLASSES, DirProducerTask::outputDir)
     }
 
     private fun getFilesFromConfiguration(artifactType: String): FileCollection {
