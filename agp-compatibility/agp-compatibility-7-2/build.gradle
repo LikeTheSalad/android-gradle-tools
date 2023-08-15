@@ -1,0 +1,9 @@
+plugins {
+    id "java-library"
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+dependencies {
+    implementation project(":agp-compatibility:agp-compatibility-api")
+    compileOnly "com.android.tools.build:gradle:7.2.0"
+}
