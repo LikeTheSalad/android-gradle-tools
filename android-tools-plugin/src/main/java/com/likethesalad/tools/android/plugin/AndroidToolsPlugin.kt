@@ -1,8 +1,8 @@
 package com.likethesalad.tools.android.plugin
 
+import com.likethesalad.tools.agpcompat.api.observable.VariantPublisher
 import com.likethesalad.tools.android.plugin.data.strategies.PluginStrategy
 import com.likethesalad.tools.android.plugin.extension.AndroidToolsPluginExtension
-import com.likethesalad.tools.android.plugin.extension.observable.VariantPublisher
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

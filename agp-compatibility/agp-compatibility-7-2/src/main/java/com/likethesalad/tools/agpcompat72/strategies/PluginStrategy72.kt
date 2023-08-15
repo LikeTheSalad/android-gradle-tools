@@ -1,17 +1,17 @@
-package com.likethesalad.tools.android.plugin.data.strategies.impl
+package com.likethesalad.tools.agpcompat72.strategies
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.api.BaseVariant
-import com.likethesalad.tools.android.plugin.data.AndroidExtension
-import com.likethesalad.tools.android.plugin.data.impl.DefaultAndroidExtension
-import com.likethesalad.tools.android.plugin.data.impl.DefaultAndroidVariantData
-import com.likethesalad.tools.android.plugin.data.strategies.PluginStrategy
-import com.likethesalad.tools.android.plugin.extension.observable.VariantPublisher
+import com.likethesalad.tools.agpcompat.api.PluginStrategy
+import com.likethesalad.tools.agpcompat.api.bridges.AndroidExtension
+import com.likethesalad.tools.agpcompat.api.observable.VariantPublisher
+import com.likethesalad.tools.agpcompat72.bridges.AndroidExtension72
+import com.likethesalad.tools.agpcompat72.bridges.AndroidVariantData72
 import org.gradle.api.Project
 
-class LegacyPluginStrategy : PluginStrategy {
+class PluginStrategy72 : PluginStrategy {
 
     override fun configure(project: Project, publisher: VariantPublisher): AndroidExtension {
         val androidExtension = project.extensions.getByType(BaseExtension::class.java)
@@ -20,7 +20,7 @@ class LegacyPluginStrategy : PluginStrategy {
             is LibraryExtension -> configureLibraryExtension(project, publisher, androidExtension)
             else -> throw UnsupportedOperationException("Android extension type not supported")
         }
-        return DefaultAndroidExtension(androidExtension)
+        return AndroidExtension72(androidExtension)
     }
 
     private fun configureLibraryExtension(
@@ -40,7 +40,7 @@ class LegacyPluginStrategy : PluginStrategy {
     }
 
     private fun addVariantData(project: Project, publisher: VariantPublisher, androidVariant: BaseVariant) {
-        val variant = DefaultAndroidVariantData(project, androidVariant)
+        val variant = AndroidVariantData72(project, androidVariant)
         publisher.publish(variant)
     }
 }

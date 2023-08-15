@@ -1,11 +1,11 @@
-package com.likethesalad.tools.android.plugin.data.impl
+package com.likethesalad.tools.agpcompat72.bridges
 
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.api.AndroidSourceDirectorySet
-import com.likethesalad.tools.android.plugin.data.AndroidExtension
+import com.likethesalad.tools.agpcompat.api.bridges.AndroidExtension
 import java.io.File
 
-class DefaultAndroidExtension(private val extension: BaseExtension) : AndroidExtension {
+class AndroidExtension72(private val extension: BaseExtension) : AndroidExtension {
 
     override fun getVariantSrcDirs(variantName: String): Set<File> {
         return getVariantRes(variantName).srcDirs

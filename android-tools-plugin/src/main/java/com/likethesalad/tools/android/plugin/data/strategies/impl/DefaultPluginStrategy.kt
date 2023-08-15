@@ -3,7 +3,6 @@ package com.likethesalad.tools.android.plugin.data.strategies.impl
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.Variant
-import com.likethesalad.tools.android.plugin.data.AndroidExtension
 import com.likethesalad.tools.android.plugin.data.impl.componentextension.ComponentAndroidExtension
 import com.likethesalad.tools.android.plugin.data.impl.componentextension.ComponentAndroidVariantData
 import com.likethesalad.tools.android.plugin.data.strategies.PluginStrategy

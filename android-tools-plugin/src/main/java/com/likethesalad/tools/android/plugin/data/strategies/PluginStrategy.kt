@@ -1,6 +1,5 @@
 package com.likethesalad.tools.android.plugin.data.strategies
 
-import com.likethesalad.tools.android.plugin.data.AndroidExtension
 import com.likethesalad.tools.android.plugin.extension.observable.VariantPublisher
 import com.likethesalad.tools.android.plugin.version.AgpApiHelper
 import org.gradle.api.Project

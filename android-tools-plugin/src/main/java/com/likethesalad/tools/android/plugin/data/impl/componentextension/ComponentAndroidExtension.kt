@@ -2,7 +2,6 @@ package com.likethesalad.tools.android.plugin.data.impl.componentextension
 
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.internal.api.DefaultAndroidSourceDirectorySet
-import com.likethesalad.tools.android.plugin.data.AndroidExtension
 import java.io.File
 
 class ComponentAndroidExtension(private val androidExtension: CommonExtension<*, *, *, *>) : AndroidExtension {

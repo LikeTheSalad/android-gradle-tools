@@ -1,4 +1,4 @@
-package com.likethesalad.tools.android.plugin.data
+package com.likethesalad.tools.agpcompat.api.bridges
 
 import java.io.File
 

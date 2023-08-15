@@ -1,6 +1,6 @@
-package com.likethesalad.tools.android.plugin.extension.observable
+package com.likethesalad.tools.agpcompat.api.observable
 
-import com.likethesalad.tools.android.plugin.data.AndroidVariantData
+import com.likethesalad.tools.agpcompat.api.bridges.AndroidVariantData
 
 class VariantPublisher {
 

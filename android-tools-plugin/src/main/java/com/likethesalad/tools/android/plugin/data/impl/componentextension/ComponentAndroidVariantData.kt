@@ -2,8 +2,6 @@ package com.likethesalad.tools.android.plugin.data.impl.componentextension
 
 import com.android.build.api.artifact.MultipleArtifact
 import com.android.build.api.variant.Variant
-import com.likethesalad.tools.android.plugin.base.BaseJavaBytecodeGeneratorTask
-import com.likethesalad.tools.android.plugin.data.AndroidVariantData
 import org.gradle.api.Action
 import org.gradle.api.artifacts.ArtifactView
 import org.gradle.api.attributes.Attribute

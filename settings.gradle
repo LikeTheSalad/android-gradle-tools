@@ -1,2 +1,3 @@
-include 'android-tools-plugin'
-
+include ':android-tools-plugin'
+include ':agp-compatibility:agp-compatibility-api'
+include ':agp-compatibility:agp-compatibility-7-2'
