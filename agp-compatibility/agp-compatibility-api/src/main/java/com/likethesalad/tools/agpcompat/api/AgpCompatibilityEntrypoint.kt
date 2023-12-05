@@ -33,10 +33,11 @@ abstract class AgpCompatibilityEntrypoint {
 
         private fun getCurrentAgpVersion(project: Project): AgpVersion? {
             return try {
-                val componentsExtension = project.extensions.findByName("androidComponents")
-                val pluginVersionGetter = componentsExtension!!.javaClass.getDeclaredMethod("getPluginVersion")
-                val currentVersion = pluginVersionGetter.invoke(componentsExtension)
-                androidPluginVersionToAgpVersion(currentVersion)
+                project.extensions.findByName("androidComponents")?.let { componentsExtension ->
+                    val pluginVersionGetter = componentsExtension.javaClass.getDeclaredMethod("getPluginVersion")
+                    val currentVersion = pluginVersionGetter.invoke(componentsExtension)
+                    androidPluginVersionToAgpVersion(currentVersion)
+                }
             } catch (e: NoSuchMethodException) {
                 null
             }
